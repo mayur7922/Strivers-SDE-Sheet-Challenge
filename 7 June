@@ -1,0 +1,35 @@
+12) Count Inversions
+
+Code:
+
+#include <bits/stdc++.h> 
+
+int solve(vector<int>& v,int l,int u,int key){
+    if(l<=u){
+        int mid=(l+u)/2;
+        if(v[mid]==key) return mid;
+        if(key<v[mid]){
+            return solve(v,l,mid-1,key);
+        }
+        else{
+            return solve(v,mid+1,u,key);
+        }
+    }
+    return -1;
+}
+
+long long getInversions(long long *arr, int n){
+    // Write your code here.
+    vector<int> v;
+    for(int i=0; i<n; i++){
+        v.push_back(arr[i]);
+    }
+    sort(v.begin(),v.end());
+    int cnt = 0;
+    for(int i=0; i<n; i++){
+        int t = solve(v,0,v.size()-1,arr[i]);
+        v.erase(v.begin()+t);
+        cnt += t;
+    }
+    return cnt;
+}
