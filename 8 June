@@ -1,0 +1,49 @@
+15) Majority Element
+
+Code:
+
+#include <bits/stdc++.h>
+
+int findMajorityElement(int arr[], int n) {
+	// Write your code here.
+	vector<int> v;
+	for(int i=0; i<n; i++){
+		v.push_back(arr[i]);
+	}
+	map<int,int> m1;
+
+	for(auto it:v){
+		m1[it]++;
+	}
+
+	for(auto it:m1){
+		if(it.second > (n/2)) return it.first;
+	}
+
+	return -1;
+}
+
+16) Majority Element-II
+
+Code:
+
+#include <bits/stdc++.h>
+
+vector<int> majorityElementII(vector<int> &arr)
+{
+    // Write your code here.
+    int n = arr.size();
+    vector<int> ans;
+    map<int,int> m1;
+
+    for(auto it:arr){
+        m1[it]++;
+    }
+
+    for(auto it:m1){
+        if(it.second > (n/3)) ans.push_back(it.first);
+    }
+
+    return ans;
+}
+
