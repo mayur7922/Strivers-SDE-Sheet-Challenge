@@ -1,0 +1,46 @@
+3) Next Permutation
+
+Code:
+
+#include <bits/stdc++.h> 
+vector<int> nextPermutation(vector<int> &v, int n)
+{
+    //  Write your code here.
+    int k = -1,l;
+    for(int i=n-1; i>0; i--){
+        if(v[i]>v[i-1]){
+            k=i-1;
+            break;
+        }
+    }
+    if(k == -1){
+        reverse(v.begin(),v.end());
+        return v;
+    }
+    for(int i=n-1; i>0; i--){
+        if(v[i]>v[k]){
+            l=i;
+            break;
+        }
+    }
+    swap(v[k],v[l]);
+    reverse(v.begin()+k+1,v.end());
+    return v;
+}
+
+10) Find Duplicate in Array
+
+Code:
+
+#include <bits/stdc++.h>
+
+int findDuplicate(vector<int> &arr, int n){
+	// Write your code here.
+	unordered_map<int,int> m1;
+	for(auto it:arr){
+		m1[it]++;
+	}
+	for(auto it:m1){
+		if(it.second > 1) return it.first;
+	}
+}
