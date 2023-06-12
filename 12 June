@@ -1,0 +1,19 @@
+41) Remove duplicates from sorted array
+
+Code:
+
+int removeDuplicates(vector<int> &arr, int n) {
+	// Write your code here.
+	int i=0,j=0,cnt=1;
+	while(j<n){
+		if(arr[i]==arr[j]){
+			j++;
+		}
+		else if(arr[i]!=arr[j]){
+			cnt++;
+			i=j;
+			j++;
+		}
+	}
+	return cnt;
+}
