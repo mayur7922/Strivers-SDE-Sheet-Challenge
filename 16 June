@@ -1,0 +1,37 @@
+28) Delete Kth Node From End
+
+Code:
+
+Node* removeKthNode(Node* head, int K)
+{
+    // Write your code here.
+    Node* cnode = head;
+    int cnt = 0;
+
+    while(cnode != NULL){
+        cnt++;
+        if(cnode->next == NULL) cnode = NULL;
+        else cnode = cnode->next;
+    }
+
+    if(cnt == K){
+        head = head->next;
+        return head;
+    }
+
+    cnt = cnt - K;
+
+    Node* pnode = head;
+    int c = 0;
+
+    while(pnode != NULL){
+        c++;
+        if(c == cnt){
+            pnode->next = pnode->next->next;
+            break;
+        }
+        pnode = pnode->next;
+    }
+
+    return head;
+}
