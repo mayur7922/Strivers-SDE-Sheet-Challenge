@@ -1,0 +1,112 @@
+20) Find Four Elements That Sums To A Given Value
+Code:
+
+#include <bits/stdc++.h>
+
+string fourSum(vector<int> arr, int target, int n) {
+    // Write your code here.
+    sort(arr.begin(),arr.end());
+    for(int i=0; i<n; i++){
+        for(int j=i+1; j<n; j++){
+            int val = target-arr[i]-arr[j];
+            int l=j+1;
+            int u=n-1;
+            while(l<u){
+                int t = arr[l]+arr[u];
+                if(t == val) return "Yes";
+                if(t > val) u--;
+                else l++;
+            }
+        }
+    }
+    return "No";
+}
+
+46) Fractional Knapsack
+Code:
+#include <bits/stdc++.h> 
+double maximumValue (vector<pair<int, int>>& arr, int n, int w)
+{
+    // Write your code here.
+    // ITEMS contains {weight, value} pairs.
+    vector<pair<double,pair<int,int>>> v;
+    
+    for(int i=0; i<n; i++){
+        double t1=arr[i].second;
+        double t2=arr[i].first;
+        double t=t1/t2;
+        v.push_back({t,{arr[i].second,arr[i].first}});
+    }
+    
+    sort(v.begin(),v.end(),greater<pair<double,pair<int,int>>>());
+
+    double sum = 0, wt = 0;
+    
+    int i=0;
+
+    for(i; i<n; i++){
+        
+        if(wt + v[i].second.second > w) break;
+        
+        sum += v[i].second.first;
+        wt += v[i].second.second;
+    }
+
+    if(i < n){
+        double t = wt+v[i].second.second - w;
+        double t1 = v[i].second.second - t;
+
+        double p = (t1/v[i].second.second) * v[i].second.first;
+        sum += p;
+    }
+    return sum;
+}
+
+50) Subsets II
+code:
+#include <bits/stdc++.h> 
+
+void solve(vector<int>& v, map<vector<int>,int>& ans, vector<int> v1, int i, int n){
+    if(i == n){
+        sort(v1.begin(),v1.end());
+        ans[v1]++;
+        return;
+    }
+
+    solve(v,ans,v1,i+1,n);
+    v1.push_back(v[i]);
+    solve(v,ans,v1,i+1,n);
+}
+
+vector<vector<int>> uniqueSubsets(int n, vector<int> &v)
+{
+    // Write your code here.
+    vector<int> v1;
+    vector<vector<int>> ans1;
+    map<vector<int>,int> ans;
+    solve(v,ans,v1,0,n);
+    for(auto i:ans) ans1.push_back(i.first);
+    return ans1;
+}
+
+23) Count Subarrays with Given XOR
+Code:
+#include <bits/stdc++.h>
+
+int subarraysXor(vector<int> &arr, int x)
+{
+    //    Write your code here.
+    int n = arr.size();
+    int cnt = 0;
+
+    for(int i=0; i<n; i++){
+        int s = arr[i];
+        if(s == x) cnt++;
+        for(int j=i+1; j<n; j++){
+            s^=arr[j];
+            if(s == x) cnt++;
+        }
+    }
+
+    return cnt;
+}
