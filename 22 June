@@ -1,0 +1,55 @@
+31) Intersection of Two Linked Lists
+
+Code:
+
+#import <bits/stdc++.h>
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+            int data;
+            Node *next;
+            Node()
+            {
+                this->data = 0;
+                next = NULL;
+            }
+            Node(int data)
+            {
+                this->data = data;
+                this->next = NULL;
+            }
+            Node(int data, Node* next)
+            {
+                this->data = data;
+                this->next = next;
+            }
+        };
+
+*****************************************************************/
+
+Node* findIntersection(Node *firstHead, Node *secondHead)
+{
+    //Write your code here
+    unordered_set<Node*> us;
+    Node* cnode = firstHead;
+    
+    while(cnode != NULL){
+        us.insert(cnode);
+        if(cnode->next == NULL) cnode = NULL;
+        else cnode = cnode->next;
+    }
+
+    Node* pnode = secondHead;
+
+    while(pnode != NULL){
+        if(us.count(pnode)) return pnode;
+        if(pnode->next == NULL) pnode = NULL;
+        else pnode = pnode->next;
+    }
+
+    return NULL;
+}
